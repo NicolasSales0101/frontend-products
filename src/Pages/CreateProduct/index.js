@@ -102,7 +102,7 @@ export default function CreateProduct() {
 
             <TextField 
                 id="outlined-basic" 
-                label="Categorie" 
+                label="Categorie ID" 
                 variant="outlined" 
                 onChange={handleCateId} 
             /> 
