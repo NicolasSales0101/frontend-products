@@ -12,13 +12,20 @@ export default function CreateProduct() {
 
     async function sendForm(event){
         event.preventDefault();
+        console.log(prodName, prodPreco, prodPrecoDesc, prodQtEstoque, cateId)
 
         if(cateId === 0){
             console.log("Categoria inválida")
+            console.log(cateId)
         } else if (prodPreco <= 0) {
             console.log("Preço inválido")
         } else {
-            let response = await api.createProduct(prodName, prodPreco, prodPrecoDesc, prodQtEstoque, cateId);
+
+            let response = await api.createProduct(prodName, 
+                                                   parseFloat(prodPreco), 
+                                                   parseFloat(prodPrecoDesc), 
+                                                   parseFloat(prodQtEstoque), 
+                                                   parseFloat(cateId));
 
             if(response){
                 console.log("Produto cadastrado");
@@ -76,7 +83,6 @@ export default function CreateProduct() {
                 id="outlined-basic" 
                 label="Product Price" 
                 variant="outlined" 
-                type="number" 
                 onChange={handleProdPreco} 
             /> 
 
@@ -84,7 +90,6 @@ export default function CreateProduct() {
                 id="outlined-basic" 
                 label="Product Price Discount" 
                 variant="outlined" 
-                type="number" 
                 onChange={handleProdPrecoDesc} 
             /> 
 
@@ -92,7 +97,6 @@ export default function CreateProduct() {
                 id="outlined-basic" 
                 label="Quantity of products in stock" 
                 variant="outlined" 
-                type="number" 
                 onChange={handleProdQtEstoque} 
             /> 
 
@@ -100,9 +104,11 @@ export default function CreateProduct() {
                 id="outlined-basic" 
                 label="Categorie" 
                 variant="outlined" 
-                type="number" 
                 onChange={handleCateId} 
             /> 
+
+            <small>Observação: para números com casas decimais</small>
+            <small> deve-se substituir a <b>","</b> (vírgula) por <b>"."</b> (ponto)</small>
 
             <Button variant="contained" type="submit" size="large">Register</Button>
             
